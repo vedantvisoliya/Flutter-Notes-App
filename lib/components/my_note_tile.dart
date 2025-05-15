@@ -89,7 +89,7 @@ class MyNoteTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 10.0),
       width: double.infinity,
-      height: 60,
+      // height: 60,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(15.0),
@@ -98,15 +98,18 @@ class MyNoteTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              txt,
-              style: GoogleFonts.montserrat(
-                color: Theme.of(context).colorScheme.inversePrimary,
-                fontWeight: FontWeight.w600
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                txt,
+                style: GoogleFonts.montserrat(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontWeight: FontWeight.w600
+                ),
+                softWrap: true,
+                overflow: TextOverflow.visible,
               ),
-              maxLines: 2,
             ),
           ),
           Row(
