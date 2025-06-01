@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notes_app/database/data.dart';
+// import 'package:notes_app/database/data.dart';
 
 class MyNoteTile extends StatelessWidget {
-  final int index;
+  // final int index;
   final String txt;
-  final void Function(int index) removeNote;
-  final void Function(NoteDataBase db, int index, String text) editNote; 
-  final NoteDataBase db;
+  final String docID;
+  final Future<void> Function(String docID) removeNote;
+  final Future<void> Function(String docID, String newNote) editNote; 
+  // final NoteDataBase db;
   const MyNoteTile({
     super.key,
-    required this.index,
+    // required this.index,
     required this.txt, 
     required this.removeNote,
-    required this.db,
+    // required this.db,
     required this.editNote,
+    required this.docID,
   });
 
 
-  void editAlertBox(BuildContext context, TextEditingController textEditingController, final border, NoteDataBase db){
+  void editAlertBox(BuildContext context, TextEditingController textEditingController, final border, String docID){
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -52,7 +54,8 @@ class MyNoteTile extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    editNote(db, index, textEditingController.text) ;
+                    // editNote(db, index, textEditingController.text) ;
+                    editNote(docID, textEditingController.text);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -77,7 +80,7 @@ class MyNoteTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     TextEditingController textEditingController = TextEditingController();
-    textEditingController.text = db.notes[index];
+    textEditingController.text = txt;
 
     final border = OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.0),
@@ -119,8 +122,9 @@ class MyNoteTile extends StatelessWidget {
                 onPressed: () => editAlertBox(
                   context, 
                   textEditingController, 
-                  border, 
-                  db,
+                  border,
+                  docID, 
+                  // db,
                 ), 
                 icon: Icon(
                   Icons.edit,
@@ -129,7 +133,8 @@ class MyNoteTile extends StatelessWidget {
               ),
               // delete button
               IconButton(
-                onPressed: () => removeNote(index), 
+                // onPressed: () => removeNote(index), 
+                onPressed: () => removeNote(docID),
                 icon: Icon(
                   Icons.delete,
                   color: Theme.of(context).colorScheme.inversePrimary,

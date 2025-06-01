@@ -5,7 +5,7 @@ class MyAlertBox extends StatelessWidget {
   final Widget? title;
   final Widget? content;
   final String buttonTitle;
-  final void Function(String txt)? addNote;
+  final Future<void> Function(String txt)? addNote;
   const MyAlertBox({
     super.key,
     required this.title,
@@ -60,6 +60,7 @@ class MyAlertBox extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     addNote!(textEditingController.text);
+                    textEditingController.clear();
                     Navigator.pop(context);
                   },
                   child: Text(

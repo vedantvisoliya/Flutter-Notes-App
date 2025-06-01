@@ -1,14 +1,22 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/firebase_options.dart';
 import 'package:notes_app/pages/notes_page.dart';
 import 'package:notes_app/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  var box = await Hive.openBox('myBox');
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // await Hive.initFlutter();
+  // var box = await Hive.openBox('myBox');
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
